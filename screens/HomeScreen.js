@@ -61,7 +61,8 @@ export default class HomeScreen extends React.Component {
   saveUser() {
     this.setState({
       userId: this.state.unsavedUserId,
-      userModalVisible: false
+      userModalVisible: false,
+      initialRoute: "attendance"
     });
   }
 
@@ -229,7 +230,8 @@ export default class HomeScreen extends React.Component {
               <Button
                 raised
                 backgroundColor="cornflowerblue"
-                onPress={() => this.saveUser()} title="Save" />
+                onPress={() => this.saveUser()} title="Save" >
+                </Button>
 
 
             </View>

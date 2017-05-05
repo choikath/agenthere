@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View, Text, Animated, TextInput, Button } from 'react-native';
+import { Card } from 'react-native-elements';
 import { ExpoLinksView } from '@expo/samples';
 import Animation from 'lottie-react-native';
 import { FontAwesome } from '@expo/vector-icons';
@@ -23,7 +24,7 @@ export default class LinkScreen extends React.Component {
   };
 
 componentDidMount() {
-
+  this.animation.play()
 }
 
   render() {
@@ -38,21 +39,24 @@ componentDidMount() {
         {/* Go ahead and delete ExpoLinksView and replace it with your
            * content, we just wanted to provide you with some helpful links */}
            <View style={[styles.container, styles.userModal]}>
-               <Text style={styles.sectionHeader}>Conference #1</Text>
-               <View style={{flexDirection:"row", justifyContent:"flex-start", alignItems: "center"}} >
-               <Text style={styles.userInputLabel}>
-                 Attended!
-               </Text>
+           <View style={{flexDirection:"row", justifyContent:"space-around", alignItems: "center"}} >
+            <Text style={styles.sectionHeader}>Conference #1</Text>
+
+               <FontAwesome
+                 name="check"
+                 size={32}
+                 color='#00FC88' />
+                 </View>
+                 <View style={{flexDirection:"row", justifyContent:"flex-start", alignItems: "center"}} >
+
                <TextInput id="currentCode" placeholder="Type code"/>
-              
-              <FontAwesome
-                name="check"
-                size={32}
-                color='cornflowerblue' />
+               <Text style={styles.sectionHeader}></Text>
+
 
 
 
                 <View style={{position:'absolute'}}>
+
                <Animation
                   ref={animation => { this.animation = animation; }}
                   style={{
@@ -60,19 +64,35 @@ componentDidMount() {
                    height: 200,
                  }}
                  source={require('../node_modules/lottie-ios/love.json')}
-                 onPress={() => this.animation.play()}
                  />
                  </View>
                  <View style={styles.heartOverlap}>
                  <FontAwesome
                    name="heart"
                    size={24}
-                   color='cornflowerblue'
+                   color='#00FC88'
                   onPress={() => this.animation.play()}  />
                   </View>
 
+                  </View>
+                  <View style={styles.containerStyle}>
+                  <Card>
+                  <View style={{flexDirection:"column", alignItems:"center"}}>
+                  <Text style={styles.para}>Lisa Bellini, MD.</Text>
+                  <Text style={styles.userText}>(Maloney 5)</Text>
+                  <Text style={styles.userText}>Hoagies</Text>
+                  <Text style={styles.para}></Text>
+                  <FontAwesome
+                    name="file-o"
+                    size={60}
+                    color='lightgray' />
+                    <Text style={styles.para}>PDF, PPT</Text>
+                    <Text style={styles.para}></Text>
 
-               </View>
+                  </View>
+                  </Card>
+                  </View>
+
                </View>
 
       </ScrollView>
@@ -83,10 +103,13 @@ componentDidMount() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60,
+    paddingTop: 30,
     //  justifyContent: "center",
     //    alignItems: "center",
     backgroundColor: '#F4F8F9'
+  },
+  containerStyle: {
+
   },
   dateHeader: {
     fontSize: 16,
@@ -152,11 +175,12 @@ const styles = StyleSheet.create({
   },
   userInputLabel: {
     fontFamily: 'Avenir-Light',
-    fontSize: 16
+    fontSize: 16,
+
   },
   heartOverlap: {
     position: 'absolute',
-    marginLeft: 200,
+    marginLeft: 50,
 
   }
 
