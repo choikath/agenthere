@@ -11,12 +11,12 @@ import cacheAssetsAsync from './utilities/cacheAssetsAsync';
 class AppContainer extends React.Component {
   state = {
     appIsReady: false,
-    skipIntro: false,
+    skipIntro: true,
   };
 
   onSkipBtnHandle = (index) => {
     this.setState({ skipIntro: true });
-    console.log(index);
+    // console.log(index);
   }
   doneBtnHandle = () => {
     this.setState({ skipIntro: true });
@@ -24,10 +24,10 @@ class AppContainer extends React.Component {
   }
   nextBtnHandle = (index) => {
     Alert.alert('Next');
-    console.log(index);
+    // console.log(index);
   }
   onSlideChangeHandle = (index, total) => {
-    console.log(index, total);
+    // console.log(index, total);
   }
 
   componentWillMount() {
@@ -59,7 +59,7 @@ class AppContainer extends React.Component {
 
       const pageArray = [{
         title: 'Free Lunch',
-        description: 'No longer have to sign into conference! This app knows when you are here',
+        description: 'You no longer have to sign into conference! This app knows when you are here',
         img: require('./assets/icons/images/burger.png'),
         imgStyle: {
           height: 40 * 2.5,

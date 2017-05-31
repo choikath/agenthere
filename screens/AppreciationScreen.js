@@ -1,27 +1,39 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Text, Animated, TextInput, Button } from 'react-native';
+import { ScrollView, StyleSheet, View, Text, Animated, TextInput, Button, Linking } from 'react-native';
 import { Card } from 'react-native-elements';
+import Communications from 'react-native-communications';
+
 import { ExpoLinksView } from '@expo/samples';
 import Animation from 'lottie-react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 
-
-export default class LinkScreen extends React.Component {
+export default class AppreciationScreen extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      currentcode: "",
-
+      phone: "2672173215",
+      url: "https://www.pennhighfive.com/#/compliments/new/2",
     };
   }
 
 
   static route = {
     navigationBar: {
-      title: 'My Attendance',
+      title: 'Feeling grateful?',
     },
   };
+
+onButtonPress(){
+  const { phone } = this.props;
+
+  Communications.text("2672173215", `Dear bananaphone, Please send a bananagram to [recipient name] from [your name] with message [ex. thanks a bunch!]`);
+}
+
+onHiFiveButtonPress() {
+  const { url } = this.props;
+  Linking.openURL("https://www.pennhighfive.com/#/compliments/new/2").catch(err => console.error('An error occurred, err'));
+}
 
 componentDidMount() {
   this.animation.play()
@@ -39,17 +51,18 @@ componentDidMount() {
         {/* Go ahead and delete ExpoLinksView and replace it with your
            * content, we just wanted to provide you with some helpful links */}
            <View style={[styles.container, styles.userModal]}>
-           <View style={{flexDirection:"row", justifyContent:"space-around", alignItems: "center"}} >
-            <Text style={styles.sectionHeader}>Conference #1</Text>
+           {/*<View style={{flexDirection:"row", justifyContent:"space-around", alignItems: "center"}} >
+            <Text style={styles.sectionHeader}>Share your appreciation!</Text>
 
                <FontAwesome
-                 name="check"
+                 name="smile-o"
                  size={32}
-                 color='#00FC88' />
-                 </View>
+                 color='#cornflowerblue' />
+                 </View>*/}
+
+
                  <View style={{flexDirection:"row", justifyContent:"flex-start", alignItems: "center"}} >
 
-               <TextInput id="currentCode" placeholder="Type code"/>
                <Text style={styles.sectionHeader}></Text>
 
 
@@ -60,36 +73,48 @@ componentDidMount() {
                <Animation
                   ref={animation => { this.animation = animation; }}
                   style={{
-                   width: 300,
-                   height: 200,
+                   width: 100,
+                   height: 100,
                  }}
-                 source={require('../node_modules/lottie-ios/love.json')}
+                 source={require('../node_modules/lottie-ios/pencil_write.json')}
                  />
                  </View>
-                 <View style={styles.heartOverlap}>
-                 <FontAwesome
-                   name="heart"
-                   size={24}
-                   color='#00FC88'
-                  onPress={() => this.animation.play()}  />
-                  </View>
+
+
 
                   </View>
                   <View style={styles.containerStyle}>
                   <Card>
                   <View style={{flexDirection:"column", alignItems:"center"}}>
-                  <Text style={styles.para}>Lisa Bellini, MD.</Text>
-                  <Text style={styles.userText}>(Maloney 5)</Text>
-                  <Text style={styles.userText}>Hoagies</Text>
-                  <Text style={styles.para}></Text>
-                  <FontAwesome
-                    name="file-o"
-                    size={60}
-                    color='lightgray' />
-                    <Text style={styles.para}>PDF, PPT</Text>
-                    <Text style={styles.para}></Text>
+                  <Text style={styles.para}>Send a bananagram</Text>
+                  <Text style={styles.userText}>(On the next pop-up day)</Text>
 
+
+                  <Button
+                  raised
+                  backgroundColor="cornflowerblue"
+                  onPress={() => this.onButtonPress()}
+                  iconRight
+                  title="Text the bananaphone" />
                   </View>
+                  </Card>
+
+                  <Card>
+                  <View style={{flexDirection:"column", alignItems:"center"}}>
+                  <Text style={styles.para}>Send a High Five</Text>
+
+                  <Text style={styles.userText}>(To any Penn resident)</Text>
+                  <Button
+                  raised
+                  backgroundColor="cornflowerblue"
+                  onPress={() => this.onHiFiveButtonPress()}
+                  iconRight
+                  title="Send a High Five" />
+                  </View>
+                  <Ionicons
+                    name="ios-hand"
+                    size={25}
+                    color='gray' />
                   </Card>
                   </View>
 
@@ -106,7 +131,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     //  justifyContent: "center",
     //    alignItems: "center",
-    backgroundColor: '#F4F8F9'
+    backgroundColor: '#FFC107'
   },
   containerStyle: {
 

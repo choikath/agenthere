@@ -37,9 +37,10 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount() {
     Animated.timing(this.state.progress, {
-      toValue: 20,
-      duration: 20000,
+      toValue: 10,
+      duration: 50000,
     }).start();
+    this.animation.play()
   }
 
   static route = {
@@ -74,14 +75,14 @@ export default class HomeScreen extends React.Component {
       if (!this.state.userId)
         return (
           <View>
-          <Text style={styles.userText}>You're not yet signed in!</Text>
+          {/*<Text style={styles.userText}>You're not yet signed in!</Text>*/}
           <Text />
           <Button
           raised
           backgroundColor="cornflowerblue"
           onPress={() => this.changeUser()}
           iconRight
-          title="Sign in" />
+          title="Manual Sign In" />
         </View>
       );
 
@@ -159,22 +160,37 @@ export default class HomeScreen extends React.Component {
 
 
 
-
           <View style={styles.welcomeContainer}>
 
+          <Text style={styles.para}>Signing you in....</Text>
+
+          <View style={{position:'absolute', paddingVertical:10}}>
+
+          <Animation
+            ref={animation => { this.animation = animation; }}
+            style={{
+             width: 100,
+             height: 100,
+           }}
+           source={require('../node_modules/lottie-ios/beacon.json')}
+           progress={this.state.progress}/>
+           </View>
 
 
 
-          <Text style={styles.title}>AgentNow</Text>
-          <Text style={styles.dateHeader}> {moment().format('dddd MMM Do YYYY')} </Text>
+          {/*<Text style={styles.title}>AgentNow</Text>
+          <Text style={styles.dateHeader}> {moment().format('dddd MMM Do YYYY')} </Text>*/}
           <View style={styles.section}>
-          <Card>
-            <Text style={styles.sectionHeader}>Hi there!</Text>
+
+
+            {/*<Text style={styles.sectionHeader}>Hi there!</Text>*/}
+            <Text style={styles.sectionHeader} />
             {this.renderUser()}
 
 
-            </Card>
           </View>
+
+
 
 
           </View>
@@ -202,6 +218,9 @@ export default class HomeScreen extends React.Component {
           progress={this.state.progress} />
 
         </View>
+
+
+
         </Modal>
 
         <Modal
@@ -235,6 +254,7 @@ export default class HomeScreen extends React.Component {
 
 
             </View>
+
           </View>
           </Modal>
 
@@ -314,10 +334,11 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60,
+    paddingTop: 50,
     //  justifyContent: "center",
     //    alignItems: "center",
     backgroundColor: '#F4F8F9'
+//    backgroundColor: 'lightseagreen'
   },
   dateHeader: {
     fontSize: 16,
@@ -334,7 +355,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around"
   },
   section: {
-    marginTop: 20
+    marginTop: 70
   },
   title: {
     fontFamily: 'Avenir-Light',
@@ -346,7 +367,8 @@ const styles = StyleSheet.create({
   sectionHeader: {
     fontFamily: 'Avenir-Light',
     fontSize: 24,
-    marginVertical: 10
+    marginVertical: 10,
+    paddingTop: 10,
   },
 
   userText: {
@@ -395,7 +417,7 @@ const styles = StyleSheet.create({
   },
   welcomeContainer: {
     alignItems: 'center',
-    marginTop: 5,
+    marginTop: 0,
     marginBottom: 20,
   },
   welcomeImage: {
